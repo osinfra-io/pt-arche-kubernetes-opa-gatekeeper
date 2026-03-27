@@ -21,8 +21,9 @@ OpenTofu **example** module for Open Policy Agent Gatekeeper on Google Kubernete
 
 Links to documentation and other resources required to develop and iterate in this repository successfully.
 
-- [open-policy-agent](https://www.openpolicyagent.org/docs/latest/)
+- [cert-manager](https://cert-manager.io/docs)
 - [gatekeeper](https://open-policy-agent.github.io/gatekeeper/website)
+- [open-policy-agent](https://www.openpolicyagent.org/docs/latest/)
 
 ## 🔍 Tests
 
