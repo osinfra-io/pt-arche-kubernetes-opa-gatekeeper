@@ -2,6 +2,13 @@
 # https://opentofu.org/docs/language/values/locals
 
 locals {
+  helm_values = [
+    for k, v in local.helm_values_map : {
+      name  = k
+      value = v
+    }
+  ]
+
   helm_values_map = {
     "audit.resources.limits.cpu"                  = var.audit_resources_limits_cpu
     "audit.resources.limits.memory"               = var.audit_resources_limits_memory
@@ -22,10 +29,4 @@ locals {
     "replicas"                                    = var.replicas
   }
 
-  helm_values = [
-    for k, v in local.helm_values_map : {
-      name  = k
-      value = v
-    }
-  ]
 }
