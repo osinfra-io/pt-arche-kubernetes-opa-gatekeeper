@@ -56,9 +56,6 @@ resource "kubernetes_manifest" "opa_gatekeeper_ca_certificate" {
   }
 }
 
-# Kubernetes Manifest Resource
-# https://search.opentofu.org/provider/hashicorp/kubernetes/latest/docs/resources/manifest
-
 resource "kubernetes_manifest" "opa_gatekeeper_ca_issuer" {
   manifest = {
     apiVersion = "cert-manager.io/v1"
@@ -81,9 +78,6 @@ resource "kubernetes_manifest" "opa_gatekeeper_ca_issuer" {
   }
 }
 
-# Kubernetes Manifest Resource
-# https://search.opentofu.org/provider/hashicorp/kubernetes/latest/docs/resources/manifest
-
 resource "kubernetes_manifest" "opa_gatekeeper_selfsigned_issuer" {
   manifest = {
     apiVersion = "cert-manager.io/v1"
@@ -103,9 +97,6 @@ resource "kubernetes_manifest" "opa_gatekeeper_selfsigned_issuer" {
     }
   }
 }
-
-# Kubernetes Manifest Resource
-# https://search.opentofu.org/provider/hashicorp/kubernetes/latest/docs/resources/manifest
 
 resource "kubernetes_manifest" "opa_gatekeeper_server_cert" {
   manifest = {

@@ -15,6 +15,9 @@ terraform {
   }
 }
 
+# Kubernetes OPA Gatekeeper
+# https://github.com/osinfra-io/pt-arche-kubernetes-opa-gatekeeper
+
 module "test" {
   source = "../../../../regional"
 

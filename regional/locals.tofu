@@ -21,7 +21,7 @@ locals {
     "image.crdRepository"                         = "${var.artifact_registry}/openpolicyagent/gatekeeper-crds"
     "image.repository"                            = "${var.artifact_registry}/openpolicyagent/gatekeeper"
     "image.release"                               = var.gatekeeper_version
-    "podLabels.tags\\.datadoghq\\.com/env"        = module.helpers.environment
+    "podLabels.tags\\.datadoghq\\.com/env"        = module.core_helpers.environment
     "podLabels.tags\\.datadoghq\\.com/version"    = var.gatekeeper_version
     "postInstall.labelNamespace.image.repository" = "${var.artifact_registry}/openpolicyagent/gatekeeper-crds"
     "postInstall.labelNamespace.image.tag"        = var.gatekeeper_version
