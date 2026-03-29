@@ -42,9 +42,9 @@ resource "kubernetes_manifest" "opa_gatekeeper_ca_certificate" {
       isCA       = true
 
       issuerRef = {
-        name  = kubernetes_manifest.opa_gatekeeper_selfsigned_issuer.manifest.metadata.name
-        kind  = "Issuer"
         group = "cert-manager.io"
+        kind  = "Issuer"
+        name  = kubernetes_manifest.opa_gatekeeper_selfsigned_issuer.manifest.metadata.name
       }
 
       secretName = "gatekeeper-ca"
@@ -125,9 +125,9 @@ resource "kubernetes_manifest" "opa_gatekeeper_server_cert" {
       isCA     = false
 
       issuerRef = {
-        name  = kubernetes_manifest.opa_gatekeeper_ca_issuer.manifest.metadata.name
-        kind  = "Issuer"
         group = "cert-manager.io"
+        kind  = "Issuer"
+        name  = kubernetes_manifest.opa_gatekeeper_ca_issuer.manifest.metadata.name
       }
 
       renewBefore = "360h"
