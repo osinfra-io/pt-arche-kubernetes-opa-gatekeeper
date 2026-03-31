@@ -49,7 +49,15 @@ resource "kubernetes_manifest" "block_ingress_constraint_template" {
 
       targets = [
         {
-          rego   = "package k8sblockingress\n\nviolation[{\"msg\": msg}] {\n  input.review.object.kind == \"Ingress\"\n  msg := sprintf(\"Ingress resources are not allowed. Use Istio Gateway instead. Ingress: %v\", [input.review.object.metadata.name])\n}"
+          rego = <<-REGO
+            package k8sblockingress
+
+            violation[{"msg": msg}] {
+              input.review.object.kind == "Ingress"
+              msg := sprintf("Ingress resources are not allowed. Use Istio Gateway instead. Ingress: %v", [input.review.object.metadata.name])
+            }
+          REGO
+
           target = "admission.k8s.gatekeeper.sh"
         }
       ]
