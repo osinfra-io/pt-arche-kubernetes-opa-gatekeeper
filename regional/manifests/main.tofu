@@ -13,7 +13,7 @@ resource "kubernetes_manifest" "block_ingress_constraint" {
     }
 
     spec = {
-      enforcementAction = "warn"
+      enforcementAction = "deny"
 
       match = {
         excludedNamespaces = ["istio-ingress"]
