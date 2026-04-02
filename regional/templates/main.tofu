@@ -21,7 +21,7 @@ resource "kubernetes_manifest" "block_ingress_constraint_template" {
 
       targets = [
         {
-          rego   = file("${path.module}/policies/k8sblockingress.rego")
+          rego   = file("${path.module}/k8sblockingress/k8sblockingress.rego")
           target = "admission.k8s.gatekeeper.sh"
         }
       ]
