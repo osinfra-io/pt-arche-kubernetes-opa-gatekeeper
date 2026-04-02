@@ -5,7 +5,7 @@ import rego.v1
 import data.k8sblockingress
 
 test_ingress_denied if {
-	result := k8sblockingress.violation[_] with input as {"review": {"object": {
+	some result in k8sblockingress.violation with input as {"review": {"object": {
 		"kind": "Ingress",
 		"metadata": {"name": "my-ingress"},
 	}}}
