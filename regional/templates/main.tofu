@@ -21,24 +21,10 @@ resource "kubernetes_manifest" "block_ingress_constraint_template" {
 
       targets = [
         {
-          rego = <<-REGO
-            package k8sblockingress
-
-            violation[{"msg": msg}] {
-              input.review.object.kind == "Ingress"
-              msg := sprintf("Ingress resources are not allowed. Use Istio Gateway instead. Ingress: %v", [input.review.object.metadata.name])
-            }
-          REGO
-
+          rego   = file("${path.module}/policies/k8sblockingress.rego")
           target = "admission.k8s.gatekeeper.sh"
         }
       ]
     }
   }
-}
-
-resource "kubernetes_manifest" "team_constraint_templates" {
-  for_each = var.gatekeeper_constraints
-
-  manifest = each.value.template
 }

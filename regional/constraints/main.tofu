@@ -26,9 +26,3 @@ resource "kubernetes_manifest" "block_ingress_constraint" {
     }
   }
 }
-
-resource "kubernetes_manifest" "team_constraints" {
-  for_each = var.gatekeeper_constraints
-
-  manifest = each.value.constraint
-}
