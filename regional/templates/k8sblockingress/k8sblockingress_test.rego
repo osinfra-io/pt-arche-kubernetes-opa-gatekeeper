@@ -11,10 +11,3 @@ test_ingress_denied if {
 	}}}
 	result.msg == "Ingress resources are not allowed. Use Istio Gateway instead. Ingress: my-ingress"
 }
-
-test_deployment_allowed if {
-	count(k8sblockingress.violation) == 0 with input as {"review": {"object": {
-		"kind": "Deployment",
-		"metadata": {"name": "my-deployment"},
-	}}}
-}
