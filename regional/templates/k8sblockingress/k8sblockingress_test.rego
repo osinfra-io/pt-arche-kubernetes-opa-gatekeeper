@@ -1,10 +1,10 @@
 package k8sblockingress_test
 
-# regal ignore:use-rego-v1,use-if
+import rego.v1
 
 import data.k8sblockingress
 
-test_ingress_denied {
+test_ingress_denied if {
 	some result in k8sblockingress.violation with input as {"review": {"object": {
 		"kind": "Ingress",
 		"metadata": {"name": "my-ingress"},
