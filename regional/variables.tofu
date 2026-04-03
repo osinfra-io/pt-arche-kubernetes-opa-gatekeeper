@@ -84,7 +84,7 @@ variable "controller_manager_resources_requests_memory" {
 variable "gatekeeper_version" {
   description = "The version to install, this is used for the chart as well as the image tag"
   type        = string
-  default     = "v3.20.1"
+  default     = "v3.22.0"
 }
 
 variable "node_location" {
