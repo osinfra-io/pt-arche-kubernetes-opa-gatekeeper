@@ -15,9 +15,9 @@ terraform {
   }
 }
 
-# Kubernetes OPA Gatekeeper
+# Kubernetes OPA Gatekeeper Constraints
 # https://github.com/osinfra-io/pt-arche-kubernetes-opa-gatekeeper
 
 module "test" {
-  source = "../../../../../regional/manifests"
+  source = "../../../../../regional/constraints"
 }

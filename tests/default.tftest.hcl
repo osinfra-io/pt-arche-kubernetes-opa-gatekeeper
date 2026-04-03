@@ -17,10 +17,18 @@ run "default_regional" {
   }
 }
 
-run "default_regional_manifests" {
+run "default_regional_templates" {
   command = apply
 
   module {
-    source = "./tests/fixtures/default/regional/manifests"
+    source = "./tests/fixtures/default/regional/templates"
+  }
+}
+
+run "default_regional_constraints" {
+  command = apply
+
+  module {
+    source = "./tests/fixtures/default/regional/constraints"
   }
 }
