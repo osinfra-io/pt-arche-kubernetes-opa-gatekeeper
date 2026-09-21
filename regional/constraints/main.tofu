@@ -40,21 +40,10 @@ resource "kubernetes_manifest" "protect_gateway_auth_constraint" {
       enforcementAction = "deny"
 
       match = {
-        kinds = [
-          {
-            apiGroups = [""]
-            kinds     = ["Namespace", "Secret"]
-          },
-          {
-            apiGroups = ["networking.istio.io"]
-            kinds     = ["EnvoyFilter"]
-          },
-          {
-            apiGroups = ["security.istio.io"]
-            kinds     = ["AuthorizationPolicy", "RequestAuthentication"]
-          }
-        ]
+        kinds = local.protect_gateway_auth_match_kinds
       }
+
+      parameters = local.protect_gateway_auth_parameters
     }
   }
 }
