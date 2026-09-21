@@ -78,11 +78,13 @@ resource "kubernetes_manifest" "protect_gateway_auth_constraint_template" {
                   items = {
                     properties = {
                       apiGroup = {
-                        type = "string"
+                        pattern = "^$|^\\S(?:.*\\S)?$"
+                        type    = "string"
                       }
 
                       kind = {
-                        type = "string"
+                        pattern = "^\\S(?:.*\\S)?$"
+                        type    = "string"
                       }
                     }
 
@@ -95,7 +97,8 @@ resource "kubernetes_manifest" "protect_gateway_auth_constraint_template" {
 
                 protectedNamespaces = {
                   items = {
-                    type = "string"
+                    pattern = "^\\S(?:.*\\S)?$"
+                    type    = "string"
                   }
 
                   type = "array"

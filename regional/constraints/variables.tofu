@@ -37,8 +37,13 @@ variable "protected_kinds" {
   ]
 
   validation {
-    condition     = alltrue([for protected_kind in var.protected_kinds : trimspace(protected_kind.kind) != ""])
-    error_message = "Each protected_kinds entry must have a non-empty kind."
+    condition = alltrue([
+      for protected_kind in var.protected_kinds :
+      protected_kind.kind != "" &&
+      protected_kind.kind == trimspace(protected_kind.kind) &&
+      (protected_kind.apiGroup == "" || protected_kind.apiGroup == trimspace(protected_kind.apiGroup))
+    ])
+    error_message = "Each protected_kinds entry must have a non-empty, whitespace-trimmed kind and a whitespace-trimmed apiGroup."
   }
 }
 
@@ -48,7 +53,10 @@ variable "protected_namespaces" {
   default     = ["authentik"]
 
   validation {
-    condition     = alltrue([for namespace in var.protected_namespaces : trimspace(namespace) != ""])
-    error_message = "protected_namespaces entries must not be empty."
+    condition = alltrue([
+      for namespace in var.protected_namespaces :
+      namespace != "" && namespace == trimspace(namespace)
+    ])
+    error_message = "protected_namespaces entries must be non-empty and whitespace-trimmed."
   }
 }
