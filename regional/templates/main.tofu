@@ -54,6 +54,58 @@ resource "kubernetes_manifest" "protect_gateway_auth_constraint_template" {
           names = {
             kind = "K8sProtectGatewayAuth"
           }
+
+          validation = {
+            openAPIV3Schema = {
+              properties = {
+                allowedGroups = {
+                  items = {
+                    type = "string"
+                  }
+
+                  type = "array"
+                }
+
+                allowedUsers = {
+                  items = {
+                    type = "string"
+                  }
+
+                  type = "array"
+                }
+
+                protectedKinds = {
+                  items = {
+                    properties = {
+                      apiGroup = {
+                        type = "string"
+                      }
+
+                      kind = {
+                        type = "string"
+                      }
+                    }
+
+                    required = ["apiGroup", "kind"]
+                    type     = "object"
+                  }
+
+                  type = "array"
+                }
+
+                protectedNamespaces = {
+                  items = {
+                    type = "string"
+                  }
+
+                  type = "array"
+                }
+              }
+
+              required = ["allowedGroups", "allowedUsers", "protectedKinds", "protectedNamespaces"]
+              type     = "object"
+            }
+          }
         }
       }
 

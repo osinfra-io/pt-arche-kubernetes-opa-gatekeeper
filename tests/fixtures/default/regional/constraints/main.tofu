@@ -20,4 +20,16 @@ terraform {
 
 module "test" {
   source = "../../../../../regional/constraints"
+
+  allowed_groups = ["platform-admins"]
+  allowed_users  = ["platform-deployer@example.iam.gserviceaccount.com"]
+
+  protected_kinds = [
+    {
+      apiGroup = "security.istio.io"
+      kind     = "AuthorizationPolicy"
+    },
+  ]
+
+  protected_namespaces = ["identity"]
 }
