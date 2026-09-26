@@ -4,9 +4,19 @@
 
 ## Repository Description
 
-OpenTofu **example** module for Open Policy Agent Gatekeeper on Google Kubernetes Engine (GKE).
+Reusable OpenTofu child module for Open Policy Agent Gatekeeper policy enforcement on Google Kubernetes Engine (GKE).
 
 ## 🔩 Usage
+
+### Module interfaces
+
+| Source path | Purpose | Interface |
+| --- | --- | --- |
+| `//regional` | Deploys Gatekeeper and cert-manager-backed webhook certificates. | [`regional/variables.tofu`](regional/variables.tofu) |
+| `//regional/templates` | Installs the platform `K8sBlockIngress` and `K8sProtectGatewayAuth` constraint templates. | No input variables or outputs. |
+| `//regional/constraints` | Enforces the templates by blocking Kubernetes `Ingress` resources and protecting gateway-auth resources and namespaces. | [`regional/constraints/variables.tofu`](regional/constraints/variables.tofu) |
+
+The repository root is not a consumable module. Install `//regional`, then `//regional/templates`, before applying `//regional/constraints`. Constraints use `deny` enforcement: Kubernetes `Ingress` is blocked except in `istio-ingress`, and only `system:masters` may modify protected Istio authentication resources or the `authentik` namespace by default. Incorrect allowed-user/group or namespace settings can block legitimate administration, so validate changes in a non-production cluster first. Gatekeeper and its audit/controller replicas consume cluster resources; the module defaults each to one replica.
 
 > [!TIP]
 > You can check the [tests/fixtures](tests/fixtures) directory for example configurations. These fixtures set up the system for testing by providing all the necessary initial code, thus creating good examples on which to base your configurations.
