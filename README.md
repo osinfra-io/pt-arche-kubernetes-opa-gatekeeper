@@ -8,7 +8,7 @@ Reusable OpenTofu child module for Open Policy Agent Gatekeeper policy enforceme
 
 ## 🔩 Usage
 
-The repository root is not a consumable module. Install `//regional`, then `//regional/templates`, before applying `//regional/constraints`. Constraints use `deny` enforcement: Kubernetes `Ingress` is blocked except in `istio-ingress`, and only `system:masters` may modify protected Istio authentication resources or the `authentik` namespace by default. Incorrect allowed-user/group or namespace settings can block legitimate administration, so validate changes in a non-production cluster first. Gatekeeper and its audit/controller replicas consume cluster resources; the module defaults each to one replica.
+Apply `//regional`, then `//regional/templates`, then `//regional/constraints`. Default constraints block Kubernetes `Ingress` outside `istio-ingress` and restrict changes to protected Istio authentication resources and the `authentik` namespace to `system:masters`. Test permission changes in non-production to avoid blocking legitimate administration.
 
 > [!TIP]
 > You can check the [tests/fixtures](tests/fixtures) directory for example configurations. These fixtures set up the system for testing by providing all the necessary initial code, thus creating good examples on which to base your configurations.
