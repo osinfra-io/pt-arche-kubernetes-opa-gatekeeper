@@ -87,12 +87,6 @@ variable "gatekeeper_version" {
   default     = "v3.23.1"
 }
 
-variable "node_location" {
-  description = "The zone in which the cluster's nodes should be located. If not specified, the cluster's nodes are located across zones in the region"
-  type        = string
-  default     = null
-}
-
 variable "replicas" {
   description = "The number of replicas to run"
   type        = number
