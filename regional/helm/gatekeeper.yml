@@ -11,6 +11,9 @@ controllerManager:
 externalCertInjection:
   enabled: true
 
+podAnnotations:
+  ad.datadoghq.com/manager.logs: '[{"source":"gatekeeper"}]'
+
 podLabels:
   tags.datadoghq.com/service: gatekeeper
 
