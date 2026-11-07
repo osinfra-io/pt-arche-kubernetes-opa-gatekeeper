@@ -4,6 +4,10 @@
 locals {
   helm_values = {
     audit = {
+      podLabels = {
+        "tags.datadoghq.com/manager.service" = "gatekeeper-audit"
+      }
+
       resources = {
         limits = {
           cpu    = var.audit_resources_limits_cpu
@@ -18,6 +22,10 @@ locals {
     }
 
     controllerManager = {
+      podLabels = {
+        "tags.datadoghq.com/manager.service" = "gatekeeper-controller-manager"
+      }
+
       resources = {
         limits = {
           cpu    = var.controller_manager_resources_limits_cpu
@@ -39,6 +47,7 @@ locals {
 
     podLabels = {
       "tags.datadoghq.com/env"     = module.core_helpers.environment
+      "tags.datadoghq.com/service" = "gatekeeper"
       "tags.datadoghq.com/version" = var.gatekeeper_version
     }
 
